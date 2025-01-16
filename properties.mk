@@ -26,13 +26,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.buffer.size.kb=32 \
     vendor.audio.offload.gapless.enabled=true \
     vendor.audio.offload.multiaac.enable=true \
-    vendor.audio.offload.multiple.enabled=false \
-    vendor.audio.offload.passthrough=false \
     vendor.audio.offload.pstimeout.secs=3 \
     vendor.audio.offload.track.enable=true \
     vendor.audio.parser.ip.buffer.size=0 \
     vendor.audio.safx.pbe.enabled=true \
-    vendor.audio.tunnel.encode=false \
     vendor.audio.use.sw.alac.decoder=true \
     vendor.audio.use.sw.ape.decoder=true \
     vendor.audio_hal.in_period_size=144 \
@@ -41,9 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.voice.path.for.pcm.voip=false
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    use.voice.path.for.pcm.voip=false
-
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    use.voice.path.for.pcm.voip=false \
     audio.offload.min.duration.secs=60 \
     persist.vendor.audio.hac.enable=false \
     ro.audio.monitorRotation=true
@@ -99,8 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.bt.a2dp.aac_whitelist=false \
     persist.vendor.qcom.bluetooth.enable.splita2dp=true \
     persist.vendor.qcom.bluetooth.soc=cherokee \
-    ro.bluetooth.a2dp_offload.supported=true \
-    vendor.qcom.bluetooth.soc=cherokee
+    ro.bluetooth.a2dp_offload.supported=true
 
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.device.class_of_device=90,2,12 \
@@ -128,7 +122,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.camera.expose.aux=1
+    persist.vendor.camera.expose.aux=1 \
+    persist.vendor.camera.physical.num=5 \
+    persist.vendor.camera.privapp.list=org.lineageos.aperture \
+    vendor.camera.aux.packagelist=org.lineageos.aperture
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -145,7 +142,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Crypto
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.allow_encrypt_override=true \
-    ro.crypto.volume.filenames_mode=aes-256-cts
+    ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.volume.filenames_mode=aes-256-cts \
+    ro.crypto.volume.metadata.method=dm-default-key \
+    ro.crypto.volume.options=::v2
 
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -172,7 +172,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.enable_optimize_refresh=1 \
     vendor.display.use_smooth_motion=1 \
     vendor.display.disable_offline_rotator=1 \
-    vendor.display.disable_hw_recovery_dump=1
+    vendor.display.disable_hw_recovery_dump=1 \
+    vendor.display.idle_time=0
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -188,25 +189,25 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.latch_unsignaled=1 \
-    debug.sf.enable_adpf_cpu_hint=true \
+    debug.egl.hw=0 \
+    debug.mdpcomp.logs=0 \
+    debug.sf.hw=0 \
+    debug.sf.auto_latch_unsignaled=0 \
     persist.demo.hdmirotationlock=false \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.native_mode=1 \
     persist.sys.sf.force_brightness_capability=1 \
     debug.sf.disable_client_composition_cache=1 \
+    debug.sf.enable_adpf_cpu_hint=true \
+    debug.sf.enable_gl_backpressure=0 \
+    debug.sf.latch_unsignaled=1 \
     ro.opengles.version=196610 \
     ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.sm6150.api30 \
     vendor.display.enable_default_color_mode=1 \
     vendor.gralloc.disable_ubwc=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.enable_hwc_vds=0 \
-    ro.config.avoid_gfx_accel=true \
-    arm64.memtag.process.system_server=off \
-    persist.sys.fflag.override.settings_enable_monitor_phantom_procs=false \
-    renderthread.skia.reduceopstasksplitting=true \
-    persist.device_config.activity_manager.use_compaction=true
+    debug.sf.enable_hwc_vds=0
 
 # HWUI
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -257,15 +258,14 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     media.stagefright.thumbnail.prefer_hw_codecs=true
 
-# Memory optimizations
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.vendor.qti.sys.fw.bservice_age=5000 \
-    ro.vendor.qti.sys.fw.bservice_enable=true \
-    ro.vendor.qti.sys.fw.bservice_limit=8
-
 # Netflix
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.netflix.bsp_rev=Q6150-17263-1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.ssr.restart_level=ALL_ENABLE \
+    vendor.build.customerid=retail \
+    ro.vendor.mot.factory=false
 
 # NFC
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -283,17 +283,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.vendor.qti.sys.fw.bg_apps_limit=12
-
-# Qualcomm System Daemon
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.qcomsysd.enabled=1
-
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.vendorprefix=/vendor \
-    ro.vendor.radio.imei.sv=11 \
+    ro.vendor.radio.imei.sv=22 \
     persist.vendor.data.iwlan.enable=true \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.data_con_rprt=1 \
@@ -314,7 +307,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.sw_mbn_update=0 \
     persist.vendor.radio.sar_sensor=1 \
     persist.vendor.radio.fi_supported=0 \
-    persist.vendor.radio.rat_on=other \
+    persist.vendor.radio.rat_on=combine \
     persist.vendor.radio.hidl_dev_service=1 \
     persist.vendor.lte.pco_supported=true \
     persist.vendor.radio.enableadvancedscan=true \
@@ -332,9 +325,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.fflag.override.settings_provider_model=false \
     persist.vendor.data.mode=concurrent \
     ril.subscription.types=NV,RUIM \
-    ro.telephony.default_network=10,10 \
+    ro.telephony.default_network=33,33 \
     ro.vendor.use_data_netmgrd=true \
-    telephony.lteOnCdmaDevice=1,1
+    telephony.lteOnCdmaDevice=1
 
 # SurfaceFlinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -343,6 +336,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_color_management=true \
     ro.surface_flinger.wcg_composition_dataspace=143261696 \
     ro.surface_flinger.protected_contents=true \
+    ro.surface_flinger.enable_frame_rate_override=false \
     ro.surface_flinger.clear_slots_with_set_layer_buffer=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -352,11 +346,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.early.sf.duration=21000000 \
     debug.sf.early.app.duration=16500000 \
     debug.sf.earlyGl.sf.duration=13500000 \
-    debug.sf.earlyGl.app.duration=21000000 \
-    debug.sf.enable_transaction_tracing=false \
-    debug.sf.enable_gl_backpressure=0 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.layer_caching_active_layer_timeout_ms=1000
+    debug.sf.earlyGl.app.duration=21000000
 
 # Sensor
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
