@@ -250,8 +250,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.recovery_update=false
 
 # Mobile data
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.android.mobiledata=false
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.com.android.mobiledata=false
 
 # Dexpreopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
