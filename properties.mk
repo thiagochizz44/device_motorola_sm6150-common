@@ -190,6 +190,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.demo.hdmirotationlock=false \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.native_mode=1 \
+    debug.sf.enable_gl_backpressure=0 \
     persist.sys.sf.force_brightness_capability=1 \
     debug.sf.disable_client_composition_cache=1 \
     ro.opengles.version=196610 \
