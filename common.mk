@@ -237,27 +237,46 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.art_lowmem=true
 
+# Compile SystemUI on device with `speed`.
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.systemuicompilerfilter=speed
+
 # Strip the local variable table and the local variable type table to reduce
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
+# Reduce SystemServer Debug
+PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
+
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
-# Updater
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.recovery_update=false
-
 # Mobile data
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.com.android.mobiledata=false
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.android.mobiledata=false
+
+# Enable whole-program R8 Java optimizations for SystemUI and system_server
+SYSTEM_OPTIMIZE_JAVA := true
+SYSTEMUI_OPTIMIZE_JAVA := true
 
 # Dexpreopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Launcher3QuickStep \
     SystemUI \
     Settings
+
+# Dex
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
+
+# USAP Pool
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.usap_pool_enabled=true \
+    dalvik.vm.usap_pool_refill_delay_ms=3000 \
+    dalvik.vm.usap_pool_size_max=10 \
+    dalvik.vm.usap_pool_size_min=1 \
+    dalvik.vm.usap_refill_threshold=5
 
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true

@@ -5,7 +5,7 @@ bluetooth.device.default_name=Moto G⁹ Plus
 ro.config.avoid_gfx_accel=true
 
 # Cached app compaction
-persist.device_config.activity_manager.use_compacmtion=true
+persist.device_config.activity_manager.use_compaction=true
 
 # Brightness curve
 persist.sys.brightness.low.gamma=true
@@ -22,4 +22,8 @@ debug.cpurend.vsync=false
 # SkiaGL Threaded
 debug.renderengine.backend=skiaglthreaded
 debug.hwui.renderer=skiagl
-renderthread.skia.reduceopstasksplitting=true 
+renderthread.skia.reduceopstasksplitting=true
+
+# EGL
+ro.egl.blobcache.multifile=true
+ro.egl.blobcache.multifile_limit=33554432
